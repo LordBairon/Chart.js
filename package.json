@@ -1,13 +1,12 @@
 {
-  "name": "chart.js",
-  "homepage": "http://www.chartjs.org",
-  "description": "Simple HTML5 charts using the canvas element.",
-  "version": "2.3.0",
+  "name": "chart-lb.js",
+  "description": "Simple Adaptation of Charts.js.",
+  "version": "2.3.1",
   "license": "MIT",
   "main": "src/chart.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chartjs/Chart.js.git"
+    "url": "https://github.com/LordBairon/Chart.js.git"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
