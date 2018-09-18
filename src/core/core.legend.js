@@ -384,37 +384,39 @@ module.exports = function(Chart) {
 
 				var itemHeight = fontSize + labelOpts.padding;
 				helpers.each(me.legendItems, function(legendItem, i) {
-					var textWidth = ctx.measureText(legendItem.text).width,
+					if(legendItem.text!==""){
+						var textWidth = ctx.measureText(legendItem.text).width,
 						width = labelOpts.usePointStyle ?
 							fontSize + (fontSize / 2) + textWidth :
 							boxWidth + (fontSize / 2) + textWidth,
 						x = cursor.x,
 						y = cursor.y;
 
-					if (isHorizontal) {
-						if (x + width >= legendWidth) {
-							y = cursor.y += itemHeight;
+						if (isHorizontal) {
+							if (x + width >= legendWidth) {
+								y = cursor.y += itemHeight;
+								cursor.line++;
+								x = cursor.x = me.left + ((legendWidth - lineWidths[cursor.line]) / 2);
+							}
+						} else if (y + itemHeight > me.bottom) {
+							x = cursor.x = x + me.columnWidths[cursor.line] + labelOpts.padding;
+							y = cursor.y = me.top;
 							cursor.line++;
-							x = cursor.x = me.left + ((legendWidth - lineWidths[cursor.line]) / 2);
 						}
-					} else if (y + itemHeight > me.bottom) {
-						x = cursor.x = x + me.columnWidths[cursor.line] + labelOpts.padding;
-						y = cursor.y = me.top;
-						cursor.line++;
-					}
 
-					drawLegendBox(x, y, legendItem);
+						drawLegendBox(x, y, legendItem);
 
-					hitboxes[i].left = x;
-					hitboxes[i].top = y;
+						hitboxes[i].left = x;
+						hitboxes[i].top = y;
 
-					// Fill the actual label
-					fillText(x, y, legendItem, textWidth);
+						// Fill the actual label
+						fillText(x, y, legendItem, textWidth);
 
-					if (isHorizontal) {
-						cursor.x += width + (labelOpts.padding);
-					} else {
-						cursor.y += itemHeight;
+						if (isHorizontal) {
+							cursor.x += width + (labelOpts.padding);
+						} else {
+							cursor.y += itemHeight;
+						}
 					}
 
 				});
