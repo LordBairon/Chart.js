@@ -1,4 +1,4 @@
-# Chart.js
+# Chart-lb.js
 
 *Simple Chart.js Adaptation* [chartjs.org](http://www.chartjs.org)
 
